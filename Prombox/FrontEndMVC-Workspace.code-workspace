@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "SiteFrontEnd\\Views"
+		},
+		{
+			"path": "SiteFrontEnd\\Areas\\cliente\\Views"
+		},
+		{
+			"path": "SiteFrontEnd\\wwwroot\\Scripts"
+		}
+	],
+	"settings": {}
+}

@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+<section class="banner__home">
+    <img class="img-full-size" src="~/Assets/Cliente/Banners/Banner_Prombox_01.png" />
+</section>
+@*style="border-style: solid"*@
+<section>
+    <div class="homepage-cadastro-notas d-flex justify-content-center">
+
+        @if (ViewBag.IsAutenticado == true)
+        {
+            @*<a href="/cliente/notas/cadastrar" class="btn btn-primary btn-lg mt-4 mb-1 fw-bold" style="background-color: rgb( 0 133 233 ); border: none;">Cadastrar notas</a>*@
+            <div class="d-grid gap-2 col-12 mx-auto text-center mt-5">
+                <a href="/cliente/notas/cadastrar"><button class="btn btn-primary col-4 home-text-button-responsive-width" type="button">Cadastrar notas</button></a>
+            </div>
+        }
+        else
+        {
+            @*<a href="/login" class="btn btn-primary btn-lg mt-4 mb-1 fw-bold" style="background-color: rgb( 0 133 233 ); border-color: rgb( 0 133 233 );">QUERO ME CADASTRAR</a>*@
+            <div class="d-grid gap-2 col-12 mx-auto text-center mt-5">
+                <a href="/login"><button class="btn btn-primary col-4 home-text-button-responsive-width" type="button">QUERO ME CADASTRAR</button></a>
+            </div>
+
+        }
+        @*<button type="button" class="btn btn-primary btn-lg mt-4 mb-1">{{CADASTRAR NOTAS}}</button>*@
+        @*<a href="/cliente/notas/cadastrar" class="btn btn-primary btn-lg mt-4 mb-1">Cadastrar notas</a>*@
+
+    </div>
+    <div class="homepage-cadastro-notas d-flex justify-content-center">
+        <p class="text-white">Você ainda tem 60 dias para participar</p><br><br>
+    </div>
+</section>
+<section>
+    <img class="img-full-size" src="~/Assets/Cliente/Banners/banner_como_participar.png" />
+</section>
+<section>
+    <img class="img-full-size" src="~/Assets/Cliente/Banners/Banner_Prombox_02.png" />
+</section>

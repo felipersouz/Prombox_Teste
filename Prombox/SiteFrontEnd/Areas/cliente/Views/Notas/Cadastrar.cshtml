@@ -1,0 +1,337 @@
+﻿@{ ViewData["Title"] = "Enviar Nota"; }
+
+
+<link href="~/css/bootstrap-datepicker.css" rel="stylesheet">
+<script src="~/js/bootstrap-datepicker.min.js"></script>
+<script src="~/js/bootstrap-datepicker.pt-BR.min.js"></script>
+
+
+<section>
+    <div class="container" style="max-width: 1430px;">
+        <div class="row pt-5">
+            <h2 style="text-align:center">ENVIAR NOTA FISCAL</h2>
+            <h4 style="text-align:center">Faça aqui o cadastro da sua NF. Guarde para conferência﻿.</h4>
+        </div>
+        <div class="row mt-2">
+            @*<div class="col-md-1"></div>*@
+            <div class="col-md-6">
+                <img src="~/images/Img/NF.png" width="100%" class="img-responsive" />
+            </div>
+            <div class="col-md-6">
+
+                <form id="formNotas" method="get" action="">
+                    <div class="mt-md-0 mt-sm-4 mt-3">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-10">
+                                <input type="text" class="form-control" id="dataNota" name="dataNota" placeholder="Data da nota" maxlength="11">
+                                <label for="dataNota"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-lg-10">
+                                <input type="text" class="form-control" id="codNota" name="codNota" placeholder="Número da nota (CCO ou Número ser NFC-e)" maxlength="20">
+                                <label for="cod"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-lg-10">
+                                <input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="CNPJ do estabelecimento" maxlength="18">
+                                <label for="cnpj"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-lg-10">
+                                <input type="text" class="form-control" id="totalCompra" name="totalCompra" placeholder="Valor da compra" maxlength="15">
+                                <label for="total"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-lg-10">
+                                <button type="button" class="btn btn-primary mb-3" id="btn-enviarNota" style="width:100%">CADASTRAR</button>
+                                <h6 style="color: red" class="text-center">Não esqueça de guardar suas NF's. É muito importante.</h6>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+            @*<div class="col-md-1">
+            </div>*@
+        </div>
+    </div>
+    <br><br>
+</section>
+
+<!-- Modal confirmar cadastro -->
+<div class="modal" id="confirmaNotasModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div>
+                    <h6>Confirma que inseriu todos os dados corretamente?</h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary close" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary close" data-bs-dismiss="modal" onclick="finalizar();">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal finalizar cadastro -->
+<div class="modal" id="cadastroNotasModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div>
+                    <h4 id="titleModalCadastrarNotas"></h4>
+                </div>
+                <div>
+                    <h6>Veja todas as suas notas cadastradas em "Notas Enviadas" no menu de navegação.</h6>
+                    <h7 style="color: red">Não esqueça de guardar suas NF's. É muito importante.</h7>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary close" href="/cliente/notas/cadastrar">Ok</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal cnpj inválido -->
+<div class="modal" id="cnpjInvalidModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div>
+                    <h6>O CNPJ da nota não está habilitado para esta campanha. Entre em contato com o SAC.</h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function () {
+
+        // valida cnpj
+        jQuery.validator.addMethod("cnpj", function (value, element) {
+
+            var numeros, digitos, soma, i, resultado, pos, tamanho, digitos_iguais;
+            if (value.length == 0) {
+                return false;
+            }
+
+            value = value.replace(/\D+/g, '');
+            digitos_iguais = 1;
+
+            for (i = 0; i < value.length - 1; i++)
+                if (value.charAt(i) != value.charAt(i + 1)) {
+                    digitos_iguais = 0;
+                    break;
+                }
+            if (digitos_iguais)
+                return false;
+
+            tamanho = value.length - 2;
+            numeros = value.substring(0, tamanho);
+            digitos = value.substring(tamanho);
+            soma = 0;
+            pos = tamanho - 7;
+            for (i = tamanho; i >= 1; i--) {
+                soma += numeros.charAt(tamanho - i) * pos--;
+                if (pos < 2)
+                    pos = 9;
+            }
+            resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+            if (resultado != digitos.charAt(0)) {
+                return false;
+            }
+            tamanho = tamanho + 1;
+            numeros = value.substring(0, tamanho);
+            soma = 0;
+            pos = tamanho - 7;
+            for (i = tamanho; i >= 1; i--) {
+                soma += numeros.charAt(tamanho - i) * pos--;
+                if (pos < 2)
+                    pos = 9;
+            }
+
+            resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+
+            return (resultado == digitos.charAt(1));
+        });
+
+        // valida campos
+        jQuery("#formNotas").validate({
+            rules: {
+                dataNota: {
+                    required: true,
+                },
+                codNota: {
+                    required: true,
+                },
+                cnpj: {
+                    cnpj: true,
+                    required: true,
+                },
+                totalCompra: {
+                    required: true,
+                },
+            },
+            messages: {
+                dataNota: {
+                    required: "Campo Obrigatório",
+                },
+                codNota: {
+                    required: "Campo Obrigatório",
+                },
+                cnpj: {
+                    cnpj: "CNPJ inválido",
+                    required: "Campo Obrigatório",
+                },
+                totalCompra: {
+                    required: "Campo Obrigatório",
+                },
+            },
+            errorElement: "em",
+            errorPlacement: function (error, element) {
+                // Add the `invalid-feedback` class to the error element
+                error.addClass("invalid-feedback");
+
+                if (element.prop("type") === "checkbox") {
+                    error.insertAfter(element.next("label"));
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass("is-invalid").removeClass("is-valid");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).addClass("is-valid").removeClass("is-invalid");
+            },
+        });
+        // .datepicker config
+        $('#dataNota').datepicker({
+            format: 'dd/mm/yyyy',
+            language: "pt-BR",
+            defaultViewDate: "today",
+            endDate: "today",
+            startDate: "20/10/2021",
+        });
+
+        //jQuerry mask
+        var optionsOnlyNumber2 = {
+            'translation': {
+                0: {
+                    pattern: /[0-9]/
+                }
+            }
+        }
+
+        $("#dataNota").mask("00/00/0000", optionsOnlyNumber2);
+        $("#cnpj").mask("00.000.000/0000-00", optionsOnlyNumber2);
+        $("#totalCompra").mask("##.##0,00", { reverse: true }, optionsOnlyNumber2);
+
+    });
+    $("#codNota").keypress(function (e) {
+        var chr = String.fromCharCode(e.which);
+        if ("1234567890".indexOf(chr) < 0)
+            return false;
+    });
+
+    $("#codNota").blur(function (e) {
+        var chr = String.fromCharCode(e.which);
+        if ("abcdefghijklmnopqrstuvxywzABCDEFGHIJKLMNOPQRSTUVXYWZ ^~-".indexOf(chr) > 0)
+            $("#cpf").val("");
+    });
+
+    $('#codNota').bind('cut copy paste', function (event) {
+        event.preventDefault();
+    });
+
+    //valida capos
+    $(function () {
+        $('#btn-enviarNota').attr('disabled', true);
+        $('#formNotas').change(function () {
+            if ($('#dataNota').val() != '' && $('#codNota').val() != '' && $('#cnpj').val().length == 18 && $('#totalCompra').val().length > 1) {
+                $('#btn-enviarNota').attr('disabled', false);
+
+            } else {
+                $('#btn-enviarNota').attr('disabled', true);
+            }
+        });
+    });
+    $('#btn-enviarNota').click(function (e) {
+        $("#confirmaNotasModal").modal('show');
+    });
+
+    function finalizar() {
+        // Criação do objeto
+
+
+
+        var valorDouble = $('#totalCompra').val().replace(".", "");
+
+        while (valorDouble.indexOf(".") > 0)
+            valorDouble = valorDouble.replace(".", "");
+
+        valorDouble = valorDouble.replace(",", ".");
+
+
+        //$('#dataNota').val("01/01/2021");
+        //$('#codNota').val("132456");
+        //$('#cnpj').val("05.543.460/0001-80");
+        //valorDouble = 12345.99;
+
+
+
+        var cadastro = {
+            "Data": $('#dataNota').val(),
+            "Cod": $('#codNota').val(),
+            "Cnpj": $('#cnpj').val(),
+            "ValorTotal": valorDouble,
+            "UsuarioClienteId": 0,
+            "CampanhaId": 0
+        };
+
+        var objeto = JSON.stringify(cadastro);
+
+        console.log(objeto);
+
+        $.ajax({
+
+            url: "/cliente/notas/inserir",
+            type: 'POST',
+            contentType: "application/json;charset=utf-8",
+            data: objeto,
+            dataType: "json",
+            success: function (xhr, status, response) {
+                // modal cadastroSucessModal
+                $("#cadastroNotasModal").modal('show');
+                nomeSpanmodalNotas = $('#codNota').val(),
+                    $("#titleModalCadastrarNotas").text('Parabéns, sua nota fiscal ' + nomeSpanmodalNotas + ' foi cadastrada com sucesso!');
+                $('#formNotas').trigger("reset");
+            },
+            error: function (err) {
+
+                console.log(err);
+
+                let msg = '';
+                for (let i = 0; i < err.responseJSON.errors.length; i++) {
+                    msg += err.responseJSON.errors[i] + '\n';
+                }
+
+                $("#cnpjInvalidModal").modal('show');
+            }
+        });
+
+    }
+
+
+</script>

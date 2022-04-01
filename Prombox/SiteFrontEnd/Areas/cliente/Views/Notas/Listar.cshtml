@@ -1,0 +1,47 @@
+﻿@model List<Prombox.Domain.Entities.NotaFiscal>;
+@{ ViewData["Title"] = "Notas Enviadas"; }
+
+<section class="container">
+    <div>
+        <div class="text-center pt-5">
+            <h1>CONFIRA SUAS NOTAS FISCAIS ENVIADAS</h1>
+        </div>
+        <br>
+        <div class="text-center mt-2">
+            <h3>Guarde suas notas fiscais. Elas serão solicitadas caso você seja sorteado.</h3>
+            <h4 style="color: red">Não esqueça de guardar suas NF's. É muito importante.</h4>
+        </div>
+        <div class="table-responsive mt-7">
+            <table class="table table-striped">
+                <thead>
+                    <tr class="background-gray">
+                        <td colspan="6" style=" font-weight: bold; font-size: 18px; height: 100%; text-align:center;">VALOR TOTAL EM NOTAS FISCAIS @string.Format("{0:C}", ViewBag.TotalNotas) - SOMA DE TODAS AS NOTAS</td>
+                    </tr>
+                    <tr class="background-gray">
+                        <td>NOTA FISCAL</td>
+                        <td>CNPJ</td>
+                        <td>DATA DE CADASTRO</td>
+                        <td>DATA DA NOTA</td>
+                        <td>VALOR TOTAL</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>@item.Cod</td>
+                        <td>@item.Cnpj</td>
+                        <td>@item.DataCadastro.ToString("dd/MM/yyyy")</td>
+                        <td>@item.DataCompra.ToString("dd/MM/yyyy")</td>
+                        <td>@string.Format("{0:C}", item.ValorTotal)</td>
+                    </tr>
+                }
+                  
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<br><br><br>

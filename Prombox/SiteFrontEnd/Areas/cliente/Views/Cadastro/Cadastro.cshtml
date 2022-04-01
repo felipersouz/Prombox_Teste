@@ -1,0 +1,353 @@
+﻿@model Prombox.Domain.Entities.UsuarioCliente;
+@{
+    ViewData["Title"] = "Alterar Dados";
+}
+
+<script src="~/Scripts/UpdateCadastro.js"></script>
+
+<!-- Numeração superior -->
+<div class="container areaItems">
+    <div id="item1" class="row align-items-center pt-10" style="display: flex">
+        <div class="col col-1"><img src="~/images/Img/barra_1_1150.png" class="img-responsive" /></div>
+        <div class="col col-3"><img src="~/images/Img/passo1.png" class="img-responsive" /></div>
+        <div class="col col-3"><img src="~/images/Img/passo2cinza.png" class="img-responsive" /></div>
+        <div class="col col-3"><img src="~/images/Img/passo3cinza.png" class="img-responsive" /></div>
+        <div class="col col-2"><img src="~/images/Img/passo4cinza.png" class="img-responsive" /></div>
+    </div>
+    <div id="item2" class="row align-items-center pt-10" style="display: none">
+        <div class="col col-1"><img src="~/images/Img/barra_2_1150.png" class="img-responsive" /></div>
+        <div class="col col-3"><img src="~/images/Img/passo1.png" class="img-responsive" /></div>
+        <div class="col col-3"><img src="~/images/Img/passo2.png" class="img-responsive" /></div>
+        <div class="col col-3"><img src="~/images/Img/passo3cinza.png" class="img-responsive" /></div>
+        <div class="col col-2"><img src="~/images/Img/passo4cinza.png" class="img-responsive" /></div>
+    </div>
+    <div id="item3" class="row align-items-center pt-10" style="display: none">
+        <div class="col col-1"><img src="~/images/Img/barra_3_1150.png" class="img-responsive" /></div>
+        <div class="col col-3"><img src="~/images/Img/passo1.png" class="img-responsive" /></div>
+        <div class="col col-3"><img src="~/images/Img/passo2.png" class="img-responsive" /></div>
+        <div class="col col-3"><img src="~/images/Img/passo3.png" class="img-responsive" /></div>
+        <div class="col col-2"><img src="~/images/Img/passo4cinza.png" class="img-responsive" /></div>
+    </div>
+    <div id="item4" class="row align-items-center pt-10" style="display: none">
+        <div class="col col-1"><img src="~/images/Img/barra_4_1150.png" class="img-responsive" /></div>
+        <div class="col col-3"><img src="~/images/Img/passo1.png" class="img-responsive" /></div>
+        <div class="col col-3"><img src="~/images/Img/passo2.png" class="img-responsive" /></div>
+        <div class="col col-3"><img src="~/images/Img/passo3.png" class="img-responsive" /></div>
+        <div class="col col-2"><img src="~/images/Img/passo4.png" class="img-responsive" /></div>
+    </div>
+</div>
+
+<div class="mb-10"></div>
+
+<!-- Formulários -->
+<section>
+    <div class="container">
+
+        <form id="step1" method="get" class="form-horizontal" action="">
+
+
+            <div class="mb-5"><a class="btn btn-primary" id="btnAlterarSenha">Alterar Senha</a></div>
+
+            <fieldset>
+                <div>
+                    <h3>DADOS PESSOAIS:</h3>
+                </div>
+
+                <div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-10">
+                            <input type="text" class="form-control" id="cpf" name="cpf" value="@Model.Cliente.Cpf" placeholder="Digite seu CPF" maxlength="14">
+                            <label for="cpf"></label>
+                        </div>
+                        <div class="col-md-4 col-sm-10">
+                            <div class="input-group date">
+                                <input type="text" class="form-control" id="dataNascimento" name="dataNascimento" value="@Model.Cliente.DataNascimento" placeholder="Data de nascimento" title="Data de nascimento" maxlength="11">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-10">
+                            <input type="text" class="form-control" id="rg" name="rg" value="@Model.Cliente.Rg" placeholder="Digite seu RG (Opcional)" maxlength="12">
+                            <label for="rg"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-10">
+                            <input type="text" class="form-control" id="nomeCompleto" name="nomeCompleto" value="@Model.Cliente.Nome" placeholder="Digite seu nome completo" maxlength="100">
+                            <label for="nomeCompleto"></label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+        <form id="step2" method="get" class="form-horizontal" action="" style="display:none;">
+            <div>
+                <h3>CONTATO:</h3>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-10">
+                        <input type="email" class="form-control" id="email" name="email" value="@Model.Cliente.Email" placeholder="Digite seu email" maxlength="100">
+                        <label for="email"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-10">
+                        <input type="text" class="form-control" id="telPrincipal" name="telPrincipal" value="@Model.Cliente.TelPrincipal" placeholder="Digite seu telefone principal" maxlength="14">
+                        <label for="telPrincipal"></label>
+                    </div>
+
+                    <div class="col-md-6 col-sm-10">
+                        <input type="text" class="form-control" id="telRecado" name="telRecado" value="@Model.Cliente.TelSecundario" placeholder="Digite seu telefone de recado (Opcional)" maxlength="14">
+                        <label for="telRecado"></label>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form id="step3" method="get" class="form-horizontal" action="" style="display:none;">
+            <div>
+                <h3>ENDEREÇO:</h3>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-7">
+                        <input type="text" class="form-control" id="cep" name="cep" value="@Model.Cliente.Cep" placeholder="Digite seu CEP" maxlength="10">
+                        <label for="cep"></label>
+                    </div>
+                    <div class="col-md-4 col-sm-5">
+                        <button type="button" class="btn btn-primary mb-3" id="btnBuscaCep" onclick="BuscarCep();">Buscar</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-7 col-sm-10">
+                        <input type="text" class="form-control" id="logradouro" name="logradouro" value="@Model.Cliente.Logradouro" placeholder="Logradouro" maxlength="100">
+                        <label for="logradouro"></label>
+                    </div>
+                    <div class="col-md-2 col-sm-4">
+                        <input type="text" class="form-control" id="numero" name="numero" value="@Model.Cliente.Numero" placeholder="Número" maxlength="20">
+                        <label for="numero"></label>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <input type="text" class="form-control" id="complemento" name="complemento" value="@Model.Cliente.Complemento" placeholder="Complemento" maxlength="50">
+                        <label for="complemento"></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-10">
+                        <input type="text" class="form-control" id="bairro" name="bairro" value="@Model.Cliente.Bairro" placeholder="Bairro" maxlength="20">
+                        <label for="bairro"></label>
+                    </div>
+                    <div class="col-md-4 col-sm-10">
+                        <input type="text" class="form-control" id="cidade" name="cidade" value="@Model.Cliente.Cidade" placeholder="Cidade" maxlength="20">
+                        <label for="cidade"></label>
+                    </div>
+                    <div class="col-md-4 col-sm-10">
+                        <select id="uf" name="uf" class="form-select">
+                            <option selected disabled>Estado</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                            <option value="EX">Estrangeiro</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form id="step4" method="get" class="form-horizontal" action="" style="display:none;">
+            <div><h2>FINALIZAR:</h2></div>
+            <div>
+                @* <div class="row">
+                        <div class="col-md-4 col-sm-6">
+
+                            <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" maxlength="12">
+                            <label for="senha" class=""></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <input type="password" class="form-control" id="senha2" name="senha2" placeholder="Confirmar senha" maxlength="12">
+                            <label for="senha2" class=""></label>
+                        </div>
+                    </div> *@
+
+                <div class="row mb-4">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="termo3" name="termo3" value="accept-termo3">
+                        <label class="form-check-label" for="termo3"> Aceito receber mensagens do Whatsapp e/ou SMS</label>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <input type="hidden" id="hiddenStep" value="1" />
+        <input type="hidden" id="hiddenEstado" value="@Model.Cliente.Uf" />
+        <input type="hidden" id="hiddenTermo1" value="@Model.Cliente.Uf" />
+        <input type="hidden" id="hiddenTermo2" value="@Model.Cliente.Uf" />
+        <input type="hidden" id="hiddenTermo3" value="@Model.Cliente.Uf" />
+
+        <div class="row">
+            <div class="col-md-6 col-sm6">
+                <button id="voltar" style="display:none;" type="button" onclick="voltar();" class="btn btn-primary mb-3">VOLTAR</button>
+            </div>
+            <div class="col-md-6 col-sm6">
+                <div class="float-right">
+                    <button id="avancar" style="float: right;" type="button" onclick="avancar();" class="btn btn-primary mb-3 float-right">AVANÇAR</button>
+                    <button id="finalizar" name="finalizar" style="display:none;float: right;" @*data-toggle="modal" data-target="#cadastroSucessModal"*@ onclick="finalizar();" class="btn btn-primary mb-3">FINALIZAR</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Modal finalizar cadastro -->
+<div class="modal" id="cadastroSucessModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div>
+                    <h4>Olá, <span id="nomespanCliente"></span></h4>
+                </div>
+                <h6>Parabéns, seu cadastro foi atualizado com sucesso!</h6>
+                <div>
+                    <p>Para que você ganhe um número da sorte, informe o seu cpf no caixa na hora da compra em uma de nossas lojas.</p>
+                </div>
+                @* <div>
+                        <p>Após sua compra, aguarde até 5 dias úteis para visualizar seu número da sorte.</p>
+                    </div>
+                    <div>
+                        <p>Comprou e esqueceu de informar seu CPF no caixa? Clique abaixo e cadastre sua nota manualmente</p>
+                    </div> *@
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="GoHome();">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal cep não encontrado -->
+<div class="modal" id="cepErrorNotFound" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div>
+                    <h4>CEP não encontrado</h4>
+                </div>
+                <div>
+                    <h6>Favor preencher os campos do seu endereço</h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnCepAlterarCadastro" onclick="return_cep();" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal alterar Senha -->
+<div class="modal" id="AlterarSenhaModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div>
+                    <h4>Alterar Senha:</h4>
+                </div>
+                <form id="formAlterarSenha" method="get" action="">
+                    <div class="mb-1">
+                        <input type="password" class="form-control" id="senhaAtual" name="senhaAtual" placeholder="Senha Atual" maxlength="12">
+                    </div>
+                    <div class="mb-1">
+                        <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" maxlength="12">
+                    </div>
+                    <div class="mb-1">
+                        <input type="password" class="form-control" id="senha2" name="senha2" placeholder="Repita sua Senha" maxlength="12">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="confirmAlterarSenha" onclick="alterarSenha();">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal senha sucesso -->
+<div class="modal" id="sucessoSenhaModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div>
+                    <h6>Senha alterada com sucesso!</h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal senha não confere -->
+<div class="modal" id="SenhaInvalidModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div>
+                    <h6>Senha atual não confere!</h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal cpf erro alterar dados -->
+<div class="modal" id="cpfErrorAlterar" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div>
+                    <h6>Esse CPF já se encontra cadastrado em outra conta. Entre em contato com o SAC.</h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Entities\Enum\NewFile1.txt" />
+    <None Remove="Entities\NewFile1.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\evot_template_api_net_5\Evot.TemplateNet5\Evot.Domain\Evot.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

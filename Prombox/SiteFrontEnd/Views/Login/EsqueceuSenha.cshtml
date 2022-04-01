@@ -1,0 +1,53 @@
+﻿@{ ViewData["Title"] = "EsqueceuSenha"; }
+
+<script src="~/Scripts/RecuperaSenha.js"></script>
+
+<section class="container-fluid pb-10 pt-10" style="max-width: 400px;">
+    <div>
+        <p class="h4 text-center">Recuperar Senha</p>
+    </div>
+    <div>
+        <p>Esqueceu sua senha? Não se preocupe. É só nos confirmar seu CPF que enviaremos um link para seu email com um código de acesso para você cadastrar uma nova senha</p>
+    </div>
+    <form id="cpfRecuperarSenha">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite seu CPF" maxlength="14">
+            <label for="cpf"></label>
+        </div>
+    </form>
+    <div class="d-grid gap-2">
+        <button class="btn btn-primary" id="btnEnviar" name="btnEnviar" type="button" onclick="recuperar()"><span id="TestSpinner" class="spinner-border text-light spinner-grow-sm" role="status" style="display: none"></span> Enviar</button>
+    </div>
+</section>
+
+<!-- Modal verificar email -->
+<div class="modal" id="verificaEmailModal2" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div>
+                    <h6>Verifique seu email. Enviamos as instruções para recuperar sua senha.</h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- cpf invalid modal -->
+<div class="modal" id="cpfInvalid" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div>
+                    <h6>CPF inválido</h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>

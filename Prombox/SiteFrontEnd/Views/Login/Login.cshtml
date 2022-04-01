@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<section>
+    <div class="container">
+
+        <div class="row d-flex justify-content-center mb-4 pt-10">
+            <div class="col col-12" style="text-align: center;">
+                <h2>ENTRE E VEJA SEUS CUPONS</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-5">
+                <h3 style="font-size: larger; text-align:center" class="mb-3">JÁ TENHO CADASTRO</h3>
+
+                <form method="get" action="">
+
+                    <div class="mb-2">
+                        <input type="text" class="form-control" id="cpfLogin" name="cpfLogin" placeholder="Digite seu CPF" maxlength="11" required>
+                        <label for="cpfLogin"></label>
+                    </div>
+                    <div>
+                        <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite sua senha" maxlength="12" required>
+                        <label for="senha"></label>
+                    </div>
+
+                    <div style="text-align:right" class="mb-2"><a href="esqueci-minha-senha">Esqueceu sua senha?</a></div>
+
+                    <div class="d-grid gap-2 col-12 mx-auto">
+                        <button type="button" class="btn btn-primary mb-3" onclick="logar();">ENTRAR</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col col-2">
+
+            </div>
+            <div class="col col-5">
+                <h3 style="font-size: larger; text-align:center">NÃO TENHO CADASTRO</h3>
+                <div>
+                    <div class="d-grid gap-2 col-12 mx-auto">
+                        <a class="btn btn-primary mb-3" asp-area="" asp-controller="CadastreSe" asp-action="Index">
+                            CADASTRAR
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal  cpf/senha invalido -->
+<div class="modal" id="loginInvalidModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div>
+                    <h6>CPF e/ou senha inválidos.</h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary close" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#cpfLogin").keypress(function (e) {
+        var chr = String.fromCharCode(e.which);
+        if ("1234567890".indexOf(chr) < 0)
+            return false;
+    });
+
+    $("#cpfLogin").blur(function (e) {
+        var chr = String.fromCharCode(e.which);
+        if ("abcdefghijklmnopqrstuvxywzABCDEFGHIJKLMNOPQRSTUVXYWZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ".indexOf(chr) > 0)
+            $("#cpfLogin").val("");
+    });
+
+    // Desabilitei aqui, tava me atrapalhando e vai atrapalhar o usuário final tb - Hugo
+    @* $('#cpfLogin').bind('cut copy paste', function (event) {
+        event.preventDefault();
+    }); *@
+    $("#cpfLogin").mask("000.000.000-00");
+
+
+    function logar() {
+
+        var loginModel =
+        {
+            "login": $('#cpfLogin').val(),
+            "senha": $('#senha').val()
+        };
+
+        var objeto = JSON.stringify(loginModel);
+
+        $.ajax({
+
+            url: "login",
+            type: 'POST',
+            contentType: "application/json;charset=utf-8",
+            data: objeto,
+            dataType: "json",
+            success: function (xhr, status, response) {
+                //alert('sucesso');
+                window.location.href = 'Home';
+            },
+            error: function (err) {
+
+                //console.log(err);
+
+                let msg = '';
+                for (let i = 0; i < err.responseJSON.errors.length; i++) {
+                    msg += err.responseJSON.errors[i] + '\n';
+                }
+
+                $("#loginInvalidModal").modal('show');
+            }
+        });
+    }
+
+</script>

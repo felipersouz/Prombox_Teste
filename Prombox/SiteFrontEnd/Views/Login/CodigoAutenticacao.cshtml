@@ -1,0 +1,38 @@
+﻿@{ ViewData["Title"] = "CodigoAutenticacao"; }
+
+<script src="~/Scripts/RecuperaSenha.js"></script>
+
+<section class="container-fluid pb-10 pt-10" style="max-width: 400px;">
+    <div>
+        <p class="h4 text-center">Código de Autenticação</p>
+    </div>
+    <div>
+        <p>Insira o código de Autenticação de 6 dígitos que foi por email</p>
+    </div>
+    <form id="codAutenticar">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="codAuth" name="codAuth" placeholder="Código">
+            <label for="codAuth"></label>
+        </div>
+    </form>
+    <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="button" id="btnEnviar" name="btnEnviar" onclick="codigoAutenticacao()">Enviar</button>
+    </div>
+</section>
+
+<!-- Modal verificar email -->
+<div class="modal" id="verificaEmailModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div>
+                    <h6>Verifique seu email. Enviamos sua nova senha.</h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+

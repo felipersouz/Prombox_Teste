@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <None Remove="Services\Mail\Templates\NovaSenha.html" />
+    <None Remove="Services\Mail\Templates\NovoUsuario.html" />
+    <None Remove="Services\Mail\Templates\NovoUsuarioCliente.html" />
+    <None Remove="Services\Mail\Templates\RecuperarSenha.html" />
+    <None Remove="Services\Mail\Templates\RecuperarSenhaUsuarioCliente.html" />
+    <None Remove="Services\Mail\Templates\SenhaAlterada.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Services\Mail\Templates\RecuperarSenhaUsuarioCliente.html" />
+    <EmbeddedResource Include="Services\Mail\Templates\SenhaAlterada.html" />
+    <EmbeddedResource Include="Services\Mail\Templates\NovaSenha.html" />
+    <EmbeddedResource Include="Services\Mail\Templates\NovoUsuarioCliente.html" />
+    <EmbeddedResource Include="Services\Mail\Templates\NovoUsuario.html" />
+    <EmbeddedResource Include="Services\Mail\Templates\RecuperarSenha.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Prombox.Domain\Prombox.Domain.csproj" />
+    <ProjectReference Include="..\Prombox.Infra\Prombox.Infra.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>

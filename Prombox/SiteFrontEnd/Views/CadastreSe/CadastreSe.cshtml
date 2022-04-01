@@ -1,0 +1,310 @@
+﻿@{
+    ViewData["Title"] = "Cadastro";
+}
+
+<script src="~/Scripts/CadastreSe.js"></script>
+
+<!-- Numeração superior -->
+<section>
+    <div class="container areaItems">
+        <div id="item1" class="row align-items-center pt-10" style="display: flex">
+            <div class=""><img src="~/images/Img/etapa1.png" class="" style="width: 100%"/></div>
+        </div>
+        <div id="item2" class="row align-items-center pt-10" style="display: none">
+            <div class=""><img src="~/images/Img/etapa2.png" class="" style="width: 100%" /></div>
+        </div>
+        <div id="item3" class="row align-items-center pt-10" style="display: none">
+            <div class=""><img src="~/images/Img/etapa3.png" class="" style="width: 100%" /></div>
+        </div>
+        <div id="item4" class="row align-items-center pt-10" style="display: none">
+            <div class=""><img src="~/images/Img/etapa4.png" class="" style="width: 100%" /></div>
+        </div>
+    </div>
+</section>
+
+<div class="mb-10"></div>
+
+<!-- Formulários -->
+<section>
+    <div class="container">
+
+        <form id="step1" method="get" class="form-horizontal" action="">
+            <fieldset>
+                <div>
+                    <h3>DADOS PESSOAIS:</h3>
+                </div>
+
+                <div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-10">
+                            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Digite seu CPF" maxlength="14" onblur="CheckCpfJaCadastrado();">
+                            <label for="cpf"></label>
+                        </div>
+                        <div class="col-md-4 col-sm-10">
+                            <div class="input-group date">
+                                <input type="text" class="form-control" id="dataNascimento" name="dataNascimento" placeholder="Data de nascimento" title="Data de nascimento" maxlength="11">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br><br>
+                        <div class="col-md-4 col-sm-10">
+                            <input type="text" class="form-control" id="rg" name="rg" placeholder="Digite seu RG (Opcional)">
+                            <label for="rg"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-10">
+                            <input type="text" class="form-control" id="nomeCompleto" name="nomeCompleto" placeholder="Digite seu nome completo" maxlength="100">
+                            <label for="nomeCompleto"></label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+        <form id="step2" method="get" class="form-horizontal" action="" style="display:none;">
+            <div>
+                <h3>CONTATO:</h3>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-10">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" maxlength="100">
+                        <label for="email"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-10">
+                        <input type="text" class="form-control" id="telPrincipal" name="telPrincipal" placeholder="Digite seu telefone principal" maxlength="14">
+                        <label for="telPrincipal"></label>
+                    </div>
+
+                    <div class="col-md-6 col-sm-10">
+                        <input type="text" class="form-control" id="telRecado" name="telRecado" placeholder="Digite seu telefone de recado (Opcional)" maxlength="14">
+                        <label for="telRecado"></label>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form id="step3" method="get" class="form-horizontal" action="" style="display:none;">
+            <div>
+                <h3>ENDEREÇO:</h3>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-7">
+                        <input type="text" class="form-control" id="cep" name="cep" placeholder="Digite seu CEP" maxlength="10">
+                        <label for="cep"></label>
+                    </div>
+                    <div class="col-md-4 col-sm-5">
+                        <button type="button" class="btn btn-primary mb-3 bg-button-color" id="btnBuscaCep">Buscar</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-7 col-sm-10">
+                        <input type="text" class="form-control" id="logradouro" name="logradouro" placeholder="Logradouro" maxlength="100">
+                        <label for="logradouro"></label>
+                    </div>
+                    <div class="col-md-2 col-sm-4">
+                        <input type="text" class="form-control" id="numero" name="numero" placeholder="Número" maxlength="20">
+                        <label for="numero"></label>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <input type="text" class="form-control" id="complemento" name="complemento" placeholder="Complemento" maxlength="50">
+                        <label for="complemento"></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-10">
+                        <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Bairro" maxlength="20">
+                        <label for="bairro"></label>
+                    </div>
+                    <div class="col-md-4 col-sm-10">
+                        <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Cidade" maxlength="20">
+                        <label for="cidade"></label>
+                    </div>
+                    <div class="col-md-4 col-sm-10">
+                        <select id="uf" name="uf" class="form-select">
+                            <option selected disabled>Estado</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                            <option value="EX">Estrangeiro</option>
+                        </select>
+                    </div>
+                    <br /><br /><br />
+                </div>
+            </div>
+        </form>
+
+        <form id="step4" method="get" class="form-horizontal" action="" style="display:none;">
+            <div><h2>Crie sua Senha:</h2></div>
+            <div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 mb-3">
+                        <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" maxlength="12">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <input type="password" class="form-control" id="senha2" name="senha2" placeholder="Confirmar senha" maxlength="12">
+                        <label for="senha2" class=""></label>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="termo1" name="termpo1" value="accept-termo1">
+                        <label class="form-check-label" for="termo1"> Estou ciente e concedo permissão da utilização dos meus dados para efeito da promoção, apuração e premiação.</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="termo2" name="termo2" value="accept-termo2">
+                        <label class="form-check-label" for="termo2"> Li e aceito o {{url Regulamento}}</label>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="termo3" name="termo3" value="accept-termo3">
+                        <label class="form-check-label" for="termo3"> Aceito receber mensagens do Whatsapp e/ou SMS</label>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <input type="hidden" id="hiddenStep" value="1" />
+
+
+        <div class="row">
+            <div class="col-6">
+                <button id="voltar" style="display:none;" type="button" onclick="voltar();" class="btn btn-primary mb-3 bg-button-color">VOLTAR</button>
+            </div>
+            <div class="col-6">
+                <div class="float-right">
+                    <button id="avancar" style="float: right;" type="button" onclick="avancar();" class="btn btn-primary mb-3 float-right bg-button-color">AVANÇAR</button>
+                    <button id="finalizar" name="finalizar" style="display:none;float: right;" onclick="finalizar();" class="btn btn-primary mb-3">FINALIZAR</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Modal finalizar cadastro -->
+<div class="modal" id="cadastroSucessModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div>
+                    <h4 id="nomeClientemodal">Nome</h4>
+                </div>
+                <h6>Parabéns, seu cadastro foi concluido com sucesso!</h6>
+                <div>
+                    <p>Para que você ganhe um número da sorte, informe o seu cpf no caixa na hora da compra em uma de nossas lojas.</p>
+                </div>
+                <div>
+                    <p>Após sua compra, aguarde até 5 dias úteis para visualizar seu número da sorte.</p>
+                </div>
+                <div>
+                    <p>Comprou e esqueceu de informar seu CPF no caixa? Clique abaixo e cadastre sua nota manualmente</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary close" href="/cliente/notas/cadastrar">Ok</a>
+                @*<button type="button" class="btn btn-danger close" data-dismiss="modal">Continuar</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal cep não encontrado -->
+<div class="modal" id="cepErrorNotFound" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div>
+                    <h4>CEP não encontrado</h4>
+                </div>
+                <div>
+                    <h6>Favor preencher os campos do seu endereço</h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal cpf já cadastrado -->
+<div class="modal" id="cpfCadastradoModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div>
+                    @*<h4>CPF já cadastrado no sistema</h4>*@
+                    <h4>CPF existente</h4>
+                </div>
+                <div>
+                    <h6>Utilize a recuperação de senha ou entre em contato com o SAC.</h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal cpf já cadastrado -->
+<div class="modal" id="cpfCadastradoModal2" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div>
+                    @*<h4>CPF já cadastrado no sistema</h4>*@
+                    <h4>CPF existente</h4>
+                </div>
+                <div>
+                    <h6>Utilize a recuperação de senha ou entre em contato com o SAC.</h6>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>

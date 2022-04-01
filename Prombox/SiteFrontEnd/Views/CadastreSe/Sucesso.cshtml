@@ -1,0 +1,23 @@
+﻿@{ ViewData["Title"] = "Cadastro Concluído"; }
+
+<div class="container">
+
+    <section class="mt-10">
+        <div>
+            <div>
+                <h3>OLÁ, @ViewBag.Cliente?.Nome.</h3>
+            </div>
+            <div>
+                <h3>Parabés, seu cadastro foi concluído com sucesso!</h3>
+            </div>
+            <div>
+                <p>Para que você ganhe um número da sorte, informe o seu CPF no caixa, na hora da compra em uma das nossas lojas.</p>
+                <p>Após sua compra, aguarde até 5 dias úteis para visualizar seu número da sorte.</p>
+                <p>Comprou e esqueceu de informar seu CPF no caixa? Clique abaixo e cadastre sua nota manualmente.</p>
+            </div>
+            <a href="@Url.Action("Index", "notas", new { Area = "cliente" })" class="btn btn-primary btn-lg">CADASTRAR NOTA</a>
+            @*<button type="button" class="btn btn-primary btn-lg">CADASTRAR NOTA</button>*@
+        </div>
+    </section>
+
+</div>

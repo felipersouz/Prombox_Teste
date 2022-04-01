@@ -1,0 +1,1 @@
+INSERT INTO Empresas (RazaoSocial, NomeFantasia,  PrecisaOrdemCompra, Ativa) values ('Prombox LTDA', 'Prombox Demo', 1, 1)

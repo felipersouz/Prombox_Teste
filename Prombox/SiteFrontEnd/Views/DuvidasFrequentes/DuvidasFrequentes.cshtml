@@ -1,0 +1,31 @@
+﻿@{ ViewData["Title"] = "Dúvidas Frequentes"; }
+
+<section>
+    <div class="duvidasfrequentes__container">
+        <br><br><br>
+        <h2 class="text-center">DÚVIDAS FREQUENTES</h2>
+        <br>
+        <div id="accordion">
+
+        @foreach (var item in ViewBag.items)
+        {
+
+
+            <div class="card">
+                <div class="card-header" style="cursor:pointer" data-toggle="collapse" data-target="@string.Format("#collapse{0}", item.Id)" aria-expanded="false" aria-controls="@string.Format("collapse{0}", item.Id)" id="@string.Format("heading{0}", item.Id)">
+                    <h5 class="mb-0">
+                        @item.Pergunta
+                    </h5>
+                </div>
+                <div id="@string.Format("collapse{0}", item.Id)" class="collapse" aria-labelledby="@string.Format("heading{0}", item.Id)" data-parent="#accordion">
+                    <div class="card-body">
+                        @item.Resposta
+                    </div>
+                </div>
+            </div>
+        }
+            
+        </div>
+    </div>
+    <br><br>
+</section>

@@ -1,0 +1,71 @@
+﻿@{ ViewData["Title"] = "Teste"; }
+
+<form class="cmxform" id="commentForm" method="get" action="">
+    <fieldset>
+        <legend>Please provide your name, email address (won't be published) and a comment</legend>
+        <p>
+            <label for="cname">Name (required, at least 2 characters)</label>
+            <input id="cname" name="name" type="text">
+        </p>
+        <p>
+            <label for="cemail">E-Mail (required)</label>
+            <input id="cemail" type="email" name="email" required>
+        </p>
+        <p>
+            <label for="curl">URL (optional)</label>
+            <input id="curl" type="url" name="url">
+        </p>
+        <p>
+            <label for="ccomment">Your comment (required)</label>
+            <textarea id="ccomment" name="comment" required></textarea>
+        </p>
+        <p>
+            <input class="submit" type="submit" value="Submit">
+        </p>
+    </fieldset>
+</form>
+<script>
+    //$("#commentForm").validate();
+
+
+    jQuery("#commentForm").validate({
+        rules: {
+            name: {
+                required: true,
+                minlength: 11,
+                maxlength: 14
+            //},
+            //dataNascimento: "required",
+            //rg: "required",
+            //nomeCompleto: {
+            //    required: true,
+            //    minlength: 5,
+            //    maxlength: 100,
+            }
+        },
+        messages: {
+            name: {
+                required: "Preencha seu nome completo",
+                minlength: "Seu nome completo necessita ter pelo menos 5 caracteres",
+                minlength: "Seu nome completo necessita ter pelo MAX 50 caracteres"
+            }
+        },
+        errorElement: "em",
+        errorPlacement: function (error, element) {
+            // Add the `invalid-feedback` class to the error element
+            error.addClass("invalid-feedback");
+
+            if (element.prop("type") === "checkbox") {
+                error.insertAfter(element.next("label"));
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        highlight: function (element, errorClass, validClass) {
+            $(element).addClass("is-invalid").removeClass("is-valid");
+        },
+        unhighlight: function (element, errorClass, validClass) {
+            $(element).addClass("is-valid").removeClass("is-invalid");
+        }
+    });
+</script>
